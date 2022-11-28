@@ -42,6 +42,6 @@ main() {
         printn(); // expect 3
     }
     printn(); // expect 0
-}
+};
 
 /* End of test */
