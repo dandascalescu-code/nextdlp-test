@@ -1,2 +1,5 @@
 # Batch files for windows
 /.batch/
+
+# Task PDFs
+*.pdf
