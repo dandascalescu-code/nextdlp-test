@@ -1,7 +1,18 @@
 package nextdlp.part1;
 
+/**
+ * MyDoublyLinkedList
+ * @author Dan
+ * An implementation of a doubly linked list, using no library components
+ */
 public class MyDoublyLinkedList {
 	
+	/**
+	 * MyDoublyLinkedList.ListItem
+	 * @author Dan
+	 * An object representing an item in an instance of MyDoublyLinkedList
+	 * containing its integer value, and references to the ListItems before and after in the list
+	 */
 	public class ListItem {
 		public ListItem previous;
 		public ListItem next;
@@ -23,11 +34,19 @@ public class MyDoublyLinkedList {
 		this.tail = null;
 	}
 	
+	/**
+	 * Adds item to end of list
+	 * @param value, value of integer to be added
+	 */
 	public void addItem(int value) {
 		ListItem newItem = new ListItem(value);
 		addItem(newItem);
 	}
 	
+	/**
+	 * Adds item to end of list
+	 * @param newItem, ListItem to append to list
+	 */
 	public void addItem(ListItem newItem) {
 		if ( this.head == null ) {
 			this.head = newItem;
@@ -39,11 +58,19 @@ public class MyDoublyLinkedList {
 		}
 	}
 	
+	/**
+	 * Adds item to start of list
+	 * @param value, value of integer to be added
+	 */
 	public void addItemStart(int value) {
 		ListItem newItem = new ListItem(value);
 		addItemStart(newItem);
 	}
 	
+	/**
+	 * Adds item to start of list
+	 * @param newItem, ListItem to append to list
+	 */
 	public void addItemStart(ListItem newItem) {
 		if ( this.tail == null ) {
 			this.tail = newItem;
@@ -55,18 +82,29 @@ public class MyDoublyLinkedList {
 		}
 	}
 	
+	/**
+	 * @return integer value at start of list
+	 */
 	public int getFirstValue() {
 		if ( this.head == null )
 			throw new NullPointerException("List is empty!");
 		return this.head.value;
 	}
 	
+	/**
+	 * @return integer value at end of list
+	 */
 	public int getLastValue() {
 		if ( this.head == null )
 			throw new NullPointerException("List is empty!");
 		return this.tail.value;
 	}
 	
+	/**
+	 * Removes referenced ListItem object from list, if present
+	 * @param item, ListItem to remove
+	 * @return true if element was removed successfully, false otherwise
+	 */
 	public boolean removeItem(ListItem item) {
 		ListItem current = this.head;
 		
