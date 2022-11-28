@@ -7,11 +7,20 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Brackets
+ * @author Dan
+ * Class containing static method isBalanced and required logic
+ */
 public class Brackets {
+	/** String constant specification of brackets to include in logic calculations.
+	 * Bracket pairs must be specified together, open before closing */
 	private static final String BRACKETPAIRS_STRING = "(){}[]";
 	
+	/** Map constant, for easy access of bracket open/closing pairs */
 	private static final Map<Character, Character> BRACKETPAIRS_MAP;
 	
+	/** Static block to put bracket pairs from BRACKETPAIRS_STRING into BRACKETPAIRS_MAP */
 	static {
 		BRACKETPAIRS_MAP = new HashMap<Character, Character>();
 		for (int i = 0; i < BRACKETPAIRS_STRING.length(); i+=2) {
