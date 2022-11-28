@@ -1,6 +1,7 @@
 #include <iostream>
 
 /// @brief Class to demonstrate tracking number of object instances
+/// Assumes that ...
 class MyClass {
     static int numobjs;
 
@@ -18,6 +19,8 @@ class MyClass {
     }
 };
 int MyClass::numobjs = 0;
+
+
 
 /* The following is a test of the MyClass functionality */
 
