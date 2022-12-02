@@ -11,20 +11,17 @@ struct node_t {
 /// @return a string representation of the list
 std::string list_string(node_t* headptr) {
     std::string s = "";
-
     s += "[";
 
     node_t* currentptr = headptr;
     while (currentptr != nullptr) {
-        node_t current = *currentptr;
-        s += std::to_string(current.v);
-        currentptr = current.next;
+        s += std::to_string((*currentptr).v);
+        currentptr = (*currentptr).next;
         if (currentptr != nullptr)
             s += ", ";
     }
 
     s += "]";
-    
     return s;
 }
 
