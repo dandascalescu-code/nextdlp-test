@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 /* 
     Work in progress...
@@ -9,12 +10,31 @@ struct node_t {
     node_t* next = nullptr;
 };
 
-std::ostream& operator<<(std::ostream& os, const node_t& node) {
-    return os 
-            << "Node " << &node << std::endl
-            << "\tValue: " << node.v << std::endl
-            << "\tNext pointer: " << node.next << std::endl;
-};
+std::string list_string(node_t* headptr) {
+    std::string s = "";
+
+    s += "[";
+
+    node_t* currentptr = headptr;
+    while (currentptr != nullptr) {
+        node_t current = *currentptr;
+        s += std::to_string(current.v);
+        currentptr = current.next;
+        if (currentptr != nullptr)
+            s += ", ";
+    }
+
+    s += "]";
+    
+    return s;
+}
+
+void print_node(node_t* ptr) {
+    std::cout
+        << "Node " << ptr << std::endl
+        << "\tValue: " << (*ptr).v << std::endl
+        << "\tNext: " << (*ptr).next << std::endl;
+}
 
 node_t* even_nodes(node_t** ptr) {
     node_t* headptr = *ptr;
@@ -24,35 +44,59 @@ node_t* even_nodes(node_t** ptr) {
     node_t* new_headptr = nullptr;
     node_t* new_currentptr = new_headptr;
 
+    std::cout << "\nStart" << std::endl;
+    std::cout << list_string(headptr) << " " << list_string(new_headptr) << std::endl;
     while (currentptr != nullptr) {
-        node_t current = *currentptr;
-        if (current.v % 2 == 0) {
+        //std::cout << "\nloop" << std::endl;
+        node_t* nextptr = (*currentptr).next;
+        //std::cout << "Current "; print_node(currentptr);
+        std::cout << "(Node " << currentptr << ") ";
+        if ((*currentptr).v % 2 == 0) {
             // remove from given list
-            if (prevptr == nullptr)
-                headptr = current.next;
-            else {
-                node_t previous = *prevptr;
-                previous.next = current.next;
+            if (prevptr == nullptr) {
+                //std::cout << "No previous" << std::endl;
+                //std::cout << "setting new head..." << std::endl;
+                headptr = nextptr;
+            } else {
+                //std::cout << "Previous "; print_node(prevptr);
+                //std::cout << "changing..." << std::endl;
+                (*prevptr).next = nextptr;
+                //std::cout << "Previous "; print_node(prevptr);
             }
+            (*currentptr).next = nullptr;
 
             // add to new list
             if (new_currentptr == nullptr)
                 new_headptr = currentptr;
-            else {
-                node_t new_current = *new_currentptr;
-                new_current.next = currentptr;
-            }
+            else
+                (*new_currentptr).next = currentptr;
+            
+            // update current pointers
+            currentptr = nextptr;
+            if (new_currentptr == nullptr)
+                new_currentptr = new_headptr;
+            else
+                new_currentptr = (*new_currentptr).next;
 
-            //update newlist pointer
-            new_currentptr = currentptr;
+            //std::cout << "Current "; print_node(currentptr);
+            //std::cout << "New Current "; print_node(new_currentptr);
+        } else {
+            // update pointers
+            prevptr = currentptr;
+            currentptr = nextptr;
         }
 
-        //update pointer
-        currentptr = current.next;
+        std::cout << list_string(headptr) << " " << list_string(new_headptr) << std::endl;
     }
 
+    std::cout << "End\n" << std::endl;
+
+    // Point given pointer to head pointer, which may have changed
+    *ptr = headptr;
     return new_headptr;
 };
+
+/* The following is a test of the even_nodes method functionality */
 
 main() {
     std::cout
@@ -77,5 +121,45 @@ main() {
     node_t* headptr1 = &n1;
     node_t* headptr2 = nullptr;
     
-    std::cout << *headptr1 << std::endl;
+    std::cout
+        << "Head pointer: "<< headptr1 << std::endl;
+    std::cout
+        << "List: " << list_string(headptr1) << std::endl;
+
+    node_t* new_headptr1 = even_nodes(&headptr1);
+
+    std::cout
+        << "Head pointer: " << headptr1 << std::endl; // note list now points to different location (node 1)
+    std::cout
+        << "List: " << list_string(headptr1) << std::endl;
+    
+    std::cout
+        << "New list head pointer: " << new_headptr1 << std::endl; // note new list pointer equals original (node 0)
+    std::cout
+        << "New list: " << list_string(new_headptr1) << std::endl;
+
+
+    std::cout
+        << "\n===== Test 2 =====\n";
+
+
+    std::cout
+        << "Head pointer: " << headptr2 << std::endl;
+    std::cout
+        << "List: " << list_string(headptr2) << std::endl;
+
+    node_t* new_headptr2 = even_nodes(&headptr2);
+
+    std::cout
+        << "Head pointer: " << headptr2 << std::endl; // note list now points to different location (node 1)
+    std::cout
+        << "List: " << list_string(headptr2) << std::endl;
+    
+    std::cout
+        << "New list head pointer: " << new_headptr2 << std::endl; // note new list pointer equals original (node 0)
+    std::cout
+        << "New list: " << list_string(new_headptr2) << std::endl;
+
 };
+
+/* End of test */
