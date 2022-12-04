@@ -70,7 +70,7 @@ struct node_t* even_nodes(struct node_t** ptr) {
     // Point given pointer to head pointer, which may have changed
     *ptr = headptr;
     return new_headptr;
-};
+}
 
 /* The following is a test of the even_nodes method functionality */
 
@@ -127,6 +127,6 @@ int main() {
     printf("New list: "); print_list(new_headptr2);
 
     return 0;
-};
+}
 
 /* End of test */
