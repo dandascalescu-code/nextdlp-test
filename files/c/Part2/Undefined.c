@@ -9,7 +9,7 @@ char *f(int m) {
     char buf[6];
     int x;
 
-    if (m == 1 && x--)
+    if (m == 1 && x--) /* This block will not execute, as (x--) equates to false. */
     {
         strcpy(buf, "AAAAAA"); /* This string is 7 bytes (including final 0 bytes), 
                                     but buf is 6 bytes. This will cause an overflow. */
@@ -31,7 +31,6 @@ int main(int argc, char **argv)
 {
     char *m;
     m = f(argc);
-    printf("%p\n", m);
     putchar(m[0]); /* This will seg fault if argc = 1, due to the reason on line 16. */
                     /* It will also seg fault if argc > 2 due to the reason on line 27. */
     return 0;
