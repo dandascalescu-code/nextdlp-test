@@ -126,6 +126,7 @@ int main() {
     printf("New list head pointer: %p\n", new_headptr2); // note new list pointer equals original (node 0)
     printf("New list: "); print_list(new_headptr2);
 
+    return 0;
 };
 
 /* End of test */
