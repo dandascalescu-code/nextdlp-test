@@ -29,6 +29,9 @@ void print_bytes(unsigned char* buffer, size_t n) {
   printf("]\n");
 }
 
+/// @brief Reverses the bits in a given array of bytes.
+/// @param buffer, array of 8bit characters
+/// @param n, number of bytes
 void reverse_bytes(unsigned char* buffer, size_t n) {
     for (size_t i = 0; i < 4*n; i++) { // counts i bits from 0 to half the length of buffer
         int b = i/8; // byte of buffer to use
