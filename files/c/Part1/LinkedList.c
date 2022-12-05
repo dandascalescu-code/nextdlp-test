@@ -76,7 +76,7 @@ struct node_t* even_nodes(struct node_t** ptr) {
 
 int main() {
     
-    printf( "\n===== Test =====\n");
+    printf( "\n===== Test 1 =====\n");
     
     struct node_t n1;
     n1.v = 0;
