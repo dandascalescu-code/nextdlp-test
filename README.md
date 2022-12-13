@@ -6,4 +6,5 @@ Code submissions for all five tests:
  - c++
  - c
 
-Dan Dascalescu
+#
+[Dan Dascalescu](https://github.com/ddascalescu)
